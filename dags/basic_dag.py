@@ -4,11 +4,6 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.email import EmailOperator
 from airflow.operators.python import PythonOperator
 from airflow.models import Variable
-# import json
-
-# JSON_FILE = '/home/avyuthan-shah/Desktop/F1Intern/WeekendTask/Airflow/credentials.json'
-# with open(JSON_FILE, 'r') as f:
-#     credentials = json.load(f)['smtp_credentials']
 
 # Define default arguments
 default_args = {
@@ -61,14 +56,11 @@ parse_task = PythonOperator(
 
 send_mail = EmailOperator(
     task_id='send_mail',
-    to='manishakhadka228@gmail.com',
+    to='manishakhadka@peakvoyage.com',
     subject='Database Backup Status',
     html_content="{{ task_instance.xcom_pull(task_ids='parse_task', key='email_content') }}",
     
-    # smtp_conn_id=None,
-    # smtp_user=credentials['smtp_user'],
-    # smtp_password=credentials['smtp_password'],
-    #email operator didnt allow to manual declaration of smtp credentials
+    
     dag=dag,
 )
 

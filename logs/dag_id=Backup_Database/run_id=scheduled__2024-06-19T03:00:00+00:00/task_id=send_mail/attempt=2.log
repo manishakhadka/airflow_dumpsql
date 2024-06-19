@@ -1,0 +1,40 @@
+[2024-06-19T08:56:10.180+0545] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-06-19T08:56:10.207+0545] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Backup_Database.send_mail scheduled__2024-06-19T03:00:00+00:00 [queued]>
+[2024-06-19T08:56:10.216+0545] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Backup_Database.send_mail scheduled__2024-06-19T03:00:00+00:00 [queued]>
+[2024-06-19T08:56:10.216+0545] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2024-06-19T08:56:10.281+0545] {taskinstance.py:2330} INFO - Executing <Task(EmailOperator): send_mail> on 2024-06-19 03:00:00+00:00
+[2024-06-19T08:56:10.289+0545] {standard_task_runner.py:63} INFO - Started process 20856 to run task
+[2024-06-19T08:56:10.301+0545] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'Backup_Database', 'send_mail', 'scheduled__2024-06-19T03:00:00+00:00', '--job-id', '236', '--raw', '--subdir', 'DAGS_FOLDER/basic_dag.py', '--cfg-path', '/tmp/tmph8mcg87y']
+[2024-06-19T08:56:10.306+0545] {standard_task_runner.py:91} INFO - Job 236: Subtask send_mail
+[2024-06-19T08:56:10.436+0545] {task_command.py:426} INFO - Running <TaskInstance: Backup_Database.send_mail scheduled__2024-06-19T03:00:00+00:00 [running]> on host manisha-Inspiron-3580
+[2024-06-19T08:56:10.627+0545] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='manisha' AIRFLOW_CTX_DAG_ID='Backup_Database' AIRFLOW_CTX_TASK_ID='send_mail' AIRFLOW_CTX_EXECUTION_DATE='2024-06-19T03:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-06-19T03:00:00+00:00'
+[2024-06-19T08:56:10.627+0545] {taskinstance.py:430} INFO - ::endgroup::
+[2024-06-19T08:56:10.661+0545] {logging_mixin.py:188} WARNING - /home/manisha/airflow_env/lib/python3.10/site-packages/airflow/utils/email.py:154 RemovedInAirflow3Warning: Fetching SMTP credentials from configuration variables will be deprecated in a future release. Please set credentials using a connection instead.
+[2024-06-19T08:56:10.662+0545] {configuration.py:1050} WARNING - section/key [smtp/smtp_password] not found in config
+[2024-06-19T08:56:10.662+0545] {email.py:271} INFO - Email alerting: attempt 1
+[2024-06-19T08:56:12.216+0545] {email.py:282} INFO - Sent an alert email to ['manishakhadka@peakvoyage.com']
+[2024-06-19T08:56:13.252+0545] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-06-19T08:56:13.253+0545] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/manisha/airflow_env/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/manisha/airflow_env/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/manisha/airflow_env/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/manisha/airflow_env/lib/python3.10/site-packages/airflow/operators/email.py", line 79, in execute
+    send_email(
+  File "/home/manisha/airflow_env/lib/python3.10/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/manisha/airflow_env/lib/python3.10/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/manisha/airflow_env/lib/python3.10/site-packages/airflow/utils/email.py", line 283, in send_mime_email
+    smtp_conn.sendmail(e_from, e_to, mime_msg.as_string())
+  File "/home/manisha/.pyenv/versions/3.10.14/lib/python3.10/smtplib.py", line 887, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/mail/?p=WantAuthError d2e1a72fcca58-705ccb90a6asm9646070b3a.185 - gsmtp', 'manishakhadka228@gmail.com')
+[2024-06-19T08:56:13.276+0545] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=Backup_Database, task_id=send_mail, run_id=scheduled__2024-06-19T03:00:00+00:00, execution_date=20240619T030000, start_date=20240619T031110, end_date=20240619T031113
+[2024-06-19T08:56:13.373+0545] {standard_task_runner.py:110} ERROR - Failed to execute job 236 for task send_mail ((530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/mail/?p=WantAuthError d2e1a72fcca58-705ccb90a6asm9646070b3a.185 - gsmtp', 'manishakhadka228@gmail.com'); 20856)
+[2024-06-19T08:56:13.409+0545] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-06-19T08:56:13.444+0545] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-06-19T08:56:13.446+0545] {local_task_job_runner.py:222} INFO - ::endgroup::
